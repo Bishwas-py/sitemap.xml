@@ -3,7 +3,7 @@ defmodule SitemapXml.SitemapUrlTree do
   A module to fetch and parse sitemap XML concurrently and return a nested data structure.
   """
 
-  use HTTPoison.Base
+  alias HTTPoison
   import SweetXml
 
   @max_concurrency 40
@@ -31,7 +31,7 @@ defmodule SitemapXml.SitemapUrlTree do
   ## Examples
 
       iex> SitemapXml.SitemapUrlTree.fetch_sitemap("https://web.site/sitemap.xml")
-      {:ok, "<urlset>...</urlset>"}
+      {:ok, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?xml-styleshee..."}
 
       iex> SitemapXml.SitemapUrlTree.fetch_sitemap("https://web.site/404.xml")
       {:error, "HTTP error with status 404"}

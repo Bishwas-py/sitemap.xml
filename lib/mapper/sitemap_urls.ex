@@ -1,6 +1,6 @@
 defmodule SitemapXml.SitemapUrls do
   @moduledoc """
-  A module to fetch and parse sitemap XML concurrently.
+  A module to fetch and parse URLs form sitemap XML concurrently.
   """
 
   use HTTPoison.Base
@@ -81,16 +81,16 @@ defmodule SitemapXml.SitemapUrls do
         {:error, "No URLs or nested sitemaps found in the sitemap"}
 
       sitemap_urls ->
-          sitemap_urls
-          |> Task.async_stream(&fetch_urls/1,
-            max_concurrency: @max_concurrency,
-            timeout: :timer.minutes(5)
-          )
-          |> Enum.flat_map(&unwrap_result/1)
-          |> case do
-            [] -> {:error, "No valid URLs found in nested sitemaps"}
-            urls -> {:ok, urls}
-          end
+        sitemap_urls
+        |> Task.async_stream(&fetch_urls/1,
+          max_concurrency: @max_concurrency,
+          timeout: :timer.minutes(5)
+        )
+        |> Enum.flat_map(&unwrap_result/1)
+        |> case do
+          [] -> {:error, "No valid URLs found in nested sitemaps"}
+          urls -> {:ok, urls}
+        end
     end
   end
 
