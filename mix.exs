@@ -31,7 +31,7 @@ defmodule SitemapXml.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.8"},
+      {:httpoison, "~> 2.0"},
       {:sweet_xml, "~> 0.7.0"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
